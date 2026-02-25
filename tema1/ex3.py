@@ -8,6 +8,7 @@ c2 = 2/15
 c3 = 17/315
 c4 = 62/2835
 
+#P(x) = x + x^3 * (c1 + x^2 * (c2 + x^2 * (c3 + x^2 * c4)))
 def my_tan(x):        
     x2 = x * x
     p = c4
@@ -57,6 +58,11 @@ for x in random_numbers:
     _ = math.tan(x)
 sfarsit_timp_library = time.perf_counter()
 
+t1 = sfarsit_timp_my - start_timp_my
+t2 = sfarsit_timp_library - start_timp_library
+diff_timp = abs(t1-t2)
+
 print(f"Suma erorilor absolute pentru {N} valori: {suma_erori:.10f}")
-print(f"Timpul de executie al metodei polinomiale: {(sfarsit_timp_my - start_timp_my):.6f} secunde")
-print(f"Timpul de executie al folosind biblioteca: {(sfarsit_timp_library - start_timp_library):.6f} secunde")
+print(f"Timpul de executie al metodei polinomiale: {t1:.6f} secunde")
+print(f"Timpul de executie al folosind biblioteca: {t2:.6f} secunde")
+print(f"Diferenta de timp:{diff_timp:.6f}")

@@ -9,4 +9,4 @@ while 1.0 + u != 1.0:
 
 m = m-1 # in ultima iteratie u a devenit prea mic (0)
 
-print(f"u (precizia masina) este egal cu {copie_u} iar puterea m = {m}")
+print(f"u (precizia masina) este egal cu {copie_u:.20f} iar puterea m = {m}\n")
