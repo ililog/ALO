@@ -8,6 +8,18 @@ using namespace std;
 int n;
 double epsilon;
 //double A[100][100], LU[100][100], b[100], x[100], y[100], b_verif[100];
+#define MIN -1000
+#define MAX 1000
+
+void printMatrix(vector< vector<double> > &A, int n) {
+    cout << "Elementele matricei:\n";
+    for (int i = 0; i<n; i++) {
+        for (int j = 0; j<n; j++) {
+            cout << A[i][j] << ' ';
+        }
+        cout << '\n';
+    }
+}
 
 int main() {
 
@@ -21,15 +33,18 @@ int main() {
     vector<double> b(n,0),x(n,0),y(n,0),b_verif(n,0);
     vector< vector<double> > A(n), LU(n);
 
-    cout << "Introduceti elementele matricei:\n";
     for (int i = 0; i < n; i++) 
     {
         A[i].resize(n); LU[i].resize(n);
         for (int j = 0; j < n; j++) {
-            cin >> A[i][j];
-            LU[i][j] = A[i][j];
+            double r = MIN + (MAX-MIN) * ((double)std::rand() / RAND_MAX);
+            int r2 = r;
+            A[i][j] = r2;
+            LU[i][j] = A[i][j];  
         }     
     }
+    printMatrix(A,n);
+
     cout << "Introduceti termenii liberi: ";
     for (int i = 0; i < n; i++) 
     {
@@ -94,7 +109,11 @@ int main() {
         double suma = 0;
         for (int k = p + 1; k < n; k++)
             suma += LU[p][k] * x[k];
-        x[p] = (y[p] - suma) / LU[p][p];
+        if (abs(LU[p][p]) >= epsilon) x[p] = (y[p] - suma) / LU[p][p];
+        else {
+            cout << "Nu se poate calcula solutia\n";
+            return 0;
+        }
     }
 
     cout << "Solutia x calculata: ";
